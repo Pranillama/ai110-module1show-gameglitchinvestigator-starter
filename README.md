@@ -25,13 +25,28 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+**Purpose:**
+A number guessing game where the player tries to guess a secret number within a limited number of attempts. The difficulty setting changes the number range and attempt limit.
+
+**Bugs Found:**
+- Hints were backwards — "Go Higher" showed when the guess was too high, and vice versa.
+- On even-numbered attempts, the secret number was silently converted to a string, causing wrong comparisons (e.g. `"9" > "10"` is `True` in Python string comparison).
+- `logic_utils.py` had placeholder `NotImplementedError` stubs instead of real implementations.
+- Existing tests compared the full return tuple to a plain string, so they always failed.
+
+**Fixes Applied:**
+- Swapped the hint messages in `check_guess` so "Go LOWER!" shows when guess is too high and "Go HIGHER!" when too low.
+- Removed the even-attempt string conversion so the secret is always compared as an integer.
+- Implemented all four functions in `logic_utils.py` by moving the logic from `app.py`.
+- Fixed existing tests to unpack the `(outcome, message)` tuple before asserting.
+- Added `tests/conftest.py` so pytest can find `logic_utils` when running from any directory.
+- Added three new pytest cases that directly target the two bugs fixed above.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+![Demo 1](Demo1.png)
+![Demo 2](Demo2.png)
+![Demo 3](Demo3.png)
 
 ## 🚀 Stretch Features
 

@@ -39,14 +39,23 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 ## 4. What did you learn about Streamlit and state?
 
 - In your own words, explain why the secret number kept changing in the original app.
+  - Every time a button was clicked, Streamlit re-ran the entire app.py script from top to bottom. Since random.randint() was called at the top level with no protection, it generated a brand new secret number on every rerun.
+
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+  - Think of Streamlit like refreshing a webpage every time you click anything, all your variables reset. st.session_state is like a small notebook that survives each refresh, so anything stored there stays intact across reruns.
+
 - What change did you make that finally gave the game a stable secret number?
+  - Wrapping the secret in a if "secret" not in st.session_state check, so the number is only generated once and saved. Every rerun after that just reads the same stored value instead of creating a new one.
 
 ---
 
 ## 5. Looking ahead: your developer habits
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
+  - Writing pytest cases that target specific bugs. It forced me to think clearly about what the correct behavior should be, and gave me a fast way to confirm the fix actually worked instead of just guessing.
+
 - What is one thing you would do differently next time you work with AI on a coding task?
+  - Read every AI-suggested change before accepting it. A few times Claude fixed one thing but left subtle issues nearby that I had to catch myself.
+
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+  - I used to assume AI-generated code was mostly correct and just needed small tweaks. Now I treat it like code from any other source — it needs to be read, tested, and verified before trusting it.
